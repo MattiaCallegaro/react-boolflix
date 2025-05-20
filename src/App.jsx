@@ -63,7 +63,7 @@ function App() {
                 <div className="col-12 " key={film.id}>
                   <div className="card">
                     <div className="card-image-top">
-                      <img src={film.poster_path} alt="" />
+                      <img src={`https://image.tmdb.org/t/p/w342${film.poster_path}`} alt="" />
                     </div>
                     <div className="card-body">
                       <h5>Title: {film.title || film.name}</h5>
