@@ -1,13 +1,16 @@
 
 import axios from 'axios'
+import ReactCountryFlag from "react-country-flag"
+import language from '../data/language'
 import { useEffect, useState } from 'react'
+
 
 
 function App() {
 
   const [search, setSearch] = useState("")
   const [films, setFilms] = useState([]);
-  const query = encodeURIComponent(search)
+
 
   const searchedFilm = () => {
     axios
@@ -21,10 +24,9 @@ function App() {
         setFilms(response.data.results);
         console.log("Risposta API:", response);
         console.log("Risultati film:", response.data.results);
-
-
       })
   }
+
 
 
   return (
@@ -52,7 +54,18 @@ function App() {
                     <div className="card-body">
                       <h4>{film.title}</h4>
                       <h4>{film.original_title}</h4>
-                      <p>{film.original_language}</p>
+                      <p>{""}
+                        <ReactCountryFlag
+                          countryCode={language[film.original_language]}
+                          svg
+                          style={{
+                            width: '1.5em',
+                            height: '1.5em',
+                          }}
+                          title={film.original_language}
+                        />{" "}
+                        ({film.original_language})
+                      </p>
                       <p>{film.vote_count}</p>
                     </div>
                   </div>
