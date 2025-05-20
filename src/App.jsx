@@ -11,8 +11,9 @@ function App() {
 
   const searchedFilm = () => {
     axios
-      .get("https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d", {
+      .get("https://api.themoviedb.org/3/search/movie", {
         params: {
+          api_key: "e99307154c6dfb0b4750f6603256716d",
           query: search
         }
       })
@@ -37,6 +38,28 @@ function App() {
             <input type="text" className='form-control' placeholder='Cerca...' value={search}
               onChange={(e) => setSearch(e.target.value)} />
             <button type='submit' className="btn btn-primary" onClick={searchedFilm}>Cerca</button>
+          </div>
+
+          <div className="row">
+            {films.map((film) => {
+              return (
+
+                <div className="col-12">
+                  <div className="card">
+                    <div className="card-image-top">
+                      <img src={film.poster_path} alt="" />
+                    </div>
+                    <div className="card-body">
+                      <h4>{film.title}</h4>
+                      <h4>{film.original_title}</h4>
+                      <p>{film.original_language}</p>
+                      <p>{film.vote_count}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+
           </div>
         </div>
       </div>
