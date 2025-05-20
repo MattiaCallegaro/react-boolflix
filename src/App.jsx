@@ -52,9 +52,9 @@ function App() {
                       <img src={film.poster_path} alt="" />
                     </div>
                     <div className="card-body">
-                      <h4>{film.title}</h4>
-                      <h4>{film.original_title}</h4>
-                      <p>{""}
+                      <h5>Title: {film.title}</h5>
+                      <h5>Original title: {film.original_title}</h5>
+                      <p>{"Language: "}
                         <ReactCountryFlag
                           countryCode={language[film.original_language]}
                           svg
@@ -62,11 +62,9 @@ function App() {
                             width: '1.5em',
                             height: '1.5em',
                           }}
-                          title={film.original_language}
-                        />{" "}
-                        ({film.original_language})
+                        />
                       </p>
-                      <p>{film.vote_count}</p>
+                      <p>Vote: {film.vote_count}</p>
                     </div>
                   </div>
                 </div>
