@@ -46,14 +46,14 @@ function App() {
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col-12">
+        <div className="row mt-4 justify-content-center">
+          <div className="col-12 text-center ">
             <h1>BOOLFLIX</h1>
           </div>
-          <div className="col-12">
+          <div className="col-8 d-flex mt-4 ">
             <input type="text" className='form-control' placeholder='Cerca...' value={search}
               onChange={(e) => setSearch(e.target.value)} />
-            <button type='submit' className="btn btn-primary" onClick={searchedTv}>Cerca</button>
+            <button type='submit' className="btn btn-primary mx-3" onClick={searchedTv}>Cerca</button>
           </div>
 
           <div className="row">
