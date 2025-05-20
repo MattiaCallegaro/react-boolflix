@@ -12,7 +12,7 @@ function App() {
   const [films, setFilms] = useState([]);
 
 
-  const searchedFilm = () => {
+  const searchedTv = () => {
     axios
       .get("https://api.themoviedb.org/3/search/movie", {
         params: {
@@ -20,12 +20,26 @@ function App() {
           query: search
         }
       })
-      .then((response) => {
-        setFilms(response.data.results);
-        console.log("Risposta API:", response);
-        console.log("Risultati film:", response.data.results);
-      })
-  }
+      .then((movieResponse) => {
+        const movies = movieResponse.data.results;
+
+
+        axios
+          .get("https://api.themoviedb.org/3/search/tv", {
+            params: {
+              api_key: "e99307154c6dfb0b4750f6603256716d",
+              query: search
+            }
+          })
+          .then((tvResponse) => {
+            const tvSeries = tvResponse.data.results;
+            const fusion = [...movies, ...tvSeries];
+            setFilms(fusion);
+            console.log("Risposta API:", tvResponse);
+            console.log("Tv show:", tvResponse.data.results)
+          });
+      });
+  };
 
 
 
@@ -39,21 +53,21 @@ function App() {
           <div className="col-12">
             <input type="text" className='form-control' placeholder='Cerca...' value={search}
               onChange={(e) => setSearch(e.target.value)} />
-            <button type='submit' className="btn btn-primary" onClick={searchedFilm}>Cerca</button>
+            <button type='submit' className="btn btn-primary" onClick={searchedTv}>Cerca</button>
           </div>
 
           <div className="row">
             {films.map((film) => {
               return (
 
-                <div className="col-12">
+                <div className="col-12 " key={film.id}>
                   <div className="card">
                     <div className="card-image-top">
                       <img src={film.poster_path} alt="" />
                     </div>
                     <div className="card-body">
-                      <h5>Title: {film.title}</h5>
-                      <h5>Original title: {film.original_title}</h5>
+                      <h5>Title: {film.title || film.name}</h5>
+                      <h5>Original title: {film.original_title || film.original_name}</h5>
                       <p>{"Language: "}
                         <ReactCountryFlag
                           countryCode={language[film.original_language]}
@@ -64,7 +78,7 @@ function App() {
                           }}
                         />
                       </p>
-                      <p>Vote: {film.vote_count}</p>
+                      <p>Vote: {film.vote_average}</p>
                     </div>
                   </div>
                 </div>
