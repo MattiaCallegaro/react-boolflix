@@ -2,6 +2,7 @@
 import axios from 'axios'
 import ReactCountryFlag from "react-country-flag"
 import language from '../data/language'
+import { Stars } from './components/Stars'
 import { useEffect, useState } from 'react'
 
 
@@ -10,6 +11,7 @@ function App() {
 
   const [search, setSearch] = useState("")
   const [films, setFilms] = useState([]);
+
 
 
   const searchedTv = () => {
@@ -63,7 +65,10 @@ function App() {
                 <div className="col-12 " key={film.id}>
                   <div className="card">
                     <div className="card-image-top">
-                      <img src={`https://image.tmdb.org/t/p/w342${film.poster_path}`} alt="" />
+                      <img src={
+                        film.poster_path
+                          ? `https://image.tmdb.org/t/p/w342${film.poster_path}`
+                          : "https://tinkjet.it/wp-content/uploads/2025/02/anteprima-non-disponibile-2-9.jpg"} alt="" />
                     </div>
                     <div className="card-body">
                       <h5>Title: {film.title || film.name}</h5>
@@ -71,14 +76,13 @@ function App() {
                       <p>{"Language: "}
                         <ReactCountryFlag
                           countryCode={language[film.original_language]}
-                          svg
                           style={{
                             width: '1.5em',
                             height: '1.5em',
                           }}
                         />
                       </p>
-                      <p>Vote: {film.vote_average}</p>
+                      <p>Vote:<Stars initial={film.vote_average / 2} /> </p>
                     </div>
                   </div>
                 </div>
