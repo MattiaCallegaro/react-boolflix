@@ -1,4 +1,6 @@
 
+
+// creato un un oggetto per convertire le sigle dei paesi con quelle della libreria react-country-flag
 const language = {
     en: "US",
     it: "IT",
