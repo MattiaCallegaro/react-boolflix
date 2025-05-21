@@ -22,6 +22,7 @@ export function Stars({ initial = 0 }) {
                 initialValue={rating}
                 allowFraction={true}
                 readonly={false}
+                size={20}
             /* Available Props */
 
             />
