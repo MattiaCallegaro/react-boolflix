@@ -59,7 +59,7 @@ function App() {
               <a class="navbar-brand" href="#">
                 <h1 className='logo-nav'>BOOLFLIX</h1>
               </a>
-              <form className='d-flex' role='search'>
+              <form className='d-flex' role='search' onSubmit={(e) => { e.preventDefault(); searchedTv(); }}>
                 <input type="text" className='form-control' placeholder='Cerca...' value={search}
                   onChange={(e) => setSearch(e.target.value)} />
                 <button type='submit' className="btn btn-primary mx-3" onClick={searchedTv}>Cerca</button>
@@ -105,7 +105,6 @@ function App() {
                 </div>
               )
             })}
-
           </div>
         </div>
       </div >
